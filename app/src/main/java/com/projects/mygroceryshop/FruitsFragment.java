@@ -8,19 +8,29 @@ import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 
-import java.util.Arrays;
-import java.util.List;
+import com.projects.mygroceryshop.CommandController.LoadItemCommand;
+import com.projects.mygroceryshop.Context.DBContext;
+import com.projects.mygroceryshop.Model.GroceryItem;
+import com.projects.mygroceryshop.Model.ItemCategory;
+
+import java.util.ArrayList;
 
 public class FruitsFragment extends Fragment {
 
-    private final List<GroceryItem> fruits = Arrays.asList(
-            new GroceryItem("Apple",2.99)
-    );
+    private ArrayList<GroceryItem> fruits;
+    private LoadItemCommand loadItemCommand;
+    public void loadItems() {
+        loadItemCommand = new LoadItemCommand(ItemCategory.FRUIT);
+        loadItemCommand.execute();
+        if(loadItemCommand.isExecuted()){
+            fruits = loadItemCommand.getGroceryItems();
+        }
+    }
 
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView =inflater.inflate(R.layout.fragment_layout,container,false);
-
+        loadItems();
         GroceryItemAdapter adapter = new GroceryItemAdapter(getActivity(),0, fruits);
 
         ListView listView = (ListView) rootView.findViewById(R.id.list);

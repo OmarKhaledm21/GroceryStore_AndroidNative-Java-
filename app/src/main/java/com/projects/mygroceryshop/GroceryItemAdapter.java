@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.projects.mygroceryshop.Model.GroceryItem;
+
 import java.util.List;
 
 public class GroceryItemAdapter extends ArrayAdapter<GroceryItem> {
