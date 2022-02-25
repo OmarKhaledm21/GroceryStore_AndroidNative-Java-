@@ -18,18 +18,17 @@ public class LoadItemCommand extends Command{
 
     @Override
     public void execute() {
-        if(category == ItemCategory.VEGETABLE) {
-            groceryItems = DBContext.getDBContext().getDbService().getVegetables();
-            Log.v("EXEC_VEG","LOAD VEGS");
-
-            setIsExecuted(true);
-        }else {
-            groceryItems = DBContext.getDBContext().getDbService().getFruits();
-            setIsExecuted(true);
-        }
+        groceryItems = DBContext.getDBContext().getDbService().getGroceryItems();
+        setIsExecuted(true);
     }
 
     public ArrayList<GroceryItem> getGroceryItems() {
-        return groceryItems;
+        ArrayList<GroceryItem> res = new ArrayList<>();
+        for(int i=0; i<groceryItems.size(); i++){
+            if(groceryItems.get(i).getItemCategory() == category){
+                res.add(groceryItems.get(i));
+            }
+        }
+        return res;
     }
 }

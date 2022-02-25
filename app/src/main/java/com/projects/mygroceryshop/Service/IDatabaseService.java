@@ -8,6 +8,6 @@ public interface IDatabaseService {
     public boolean addItem(GroceryItem item);
     public boolean removeItem(GroceryItem item);
     public boolean editItem(GroceryItem oldItem, GroceryItem newItem);
-    public ArrayList<GroceryItem> getVegetables();
-    public ArrayList<GroceryItem> getFruits();
+    public ArrayList<GroceryItem> getGroceryItems();
+
 }

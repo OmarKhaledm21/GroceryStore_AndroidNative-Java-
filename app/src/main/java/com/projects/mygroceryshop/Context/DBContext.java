@@ -13,9 +13,7 @@ public class DBContext {
     private DBContext(){}
 
     public static synchronized DBContext getDBContext(){
-        Log.v("CONTEXT_INVOKED","A ONCE");
         if(dbContext==null){
-            Log.v("CONTEXT_INVOKED","A NULL");
             dbService = new DB();
             dbContext = new DBContext();
         }

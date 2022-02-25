@@ -6,4 +6,7 @@ public enum ItemCategory {
     FRUIT,
     VEGETABLE;
 
+    public static int getCategoriesNumber(){
+        return ItemCategory.values().length;
+    }
 }

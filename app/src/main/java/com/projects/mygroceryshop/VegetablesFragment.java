@@ -22,44 +22,39 @@ import java.util.ArrayList;
 public class VegetablesFragment extends Fragment {
 
     private ArrayList<GroceryItem> vegs;
-    private LoadItemCommand loadItemCommand = new LoadItemCommand(ItemCategory.VEGETABLE);;
+    private final ItemCategory itemCategory = ItemCategory.VEGETABLE;
+    private LoadItemCommand loadItemCommand = new LoadItemCommand(itemCategory);
     public void loadItems() {
         loadItemCommand.execute();
         if(loadItemCommand.isExecuted()){
             vegs = loadItemCommand.getGroceryItems();
         }
-
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        loadItems();
-        Log.v("LOAD_GG","OnAttach"+(vegs.get(vegs.size()-1).getName()));
+
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,@Nullable ViewGroup container,@Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_layout,container,false);
-        Log.v("LOAD_GG","CreateView");
+        loadItems();
         GroceryItemAdapter adapter = new GroceryItemAdapter(getActivity(),0,vegs);
         ListView listView = (ListView) rootView.findViewById(R.id.list);
         listView.setAdapter(adapter);
-
         return rootView;
     }
 
     @Override
     public void onResume() {
-        Log.v("LOAD_GG","Resume");
         super.onResume();
     }
 
     @Override
     public void onDestroyView() {
-        Log.v("LOAD_GG","Destroy");
-
         super.onDestroyView();
     }
 }

@@ -1,11 +1,13 @@
 package com.projects.mygroceryshop;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.projects.mygroceryshop.CommandController.LoadItemCommand;
@@ -18,9 +20,10 @@ import java.util.ArrayList;
 public class FruitsFragment extends Fragment {
 
     private ArrayList<GroceryItem> fruits;
-    private LoadItemCommand loadItemCommand;
+    private final ItemCategory itemCategory = ItemCategory.FRUIT;
+    private LoadItemCommand loadItemCommand = new LoadItemCommand(itemCategory);
+
     public void loadItems() {
-        loadItemCommand = new LoadItemCommand(ItemCategory.FRUIT);
         loadItemCommand.execute();
         if(loadItemCommand.isExecuted()){
             fruits = loadItemCommand.getGroceryItems();
@@ -28,11 +31,16 @@ public class FruitsFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+    }
+
+    @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView =inflater.inflate(R.layout.fragment_layout,container,false);
         loadItems();
         GroceryItemAdapter adapter = new GroceryItemAdapter(getActivity(),0, fruits);
-
         ListView listView = (ListView) rootView.findViewById(R.id.list);
         listView.setAdapter(adapter);
 
