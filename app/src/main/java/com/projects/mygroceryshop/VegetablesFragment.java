@@ -45,6 +45,9 @@ public class VegetablesFragment extends Fragment {
         GroceryItemAdapter adapter = new GroceryItemAdapter(getActivity(),0,vegs);
         ListView listView = (ListView) rootView.findViewById(R.id.list);
         listView.setAdapter(adapter);
+
+
+
         return rootView;
     }
 

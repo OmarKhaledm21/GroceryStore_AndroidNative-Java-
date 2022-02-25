@@ -17,9 +17,10 @@ import com.google.android.material.tabs.TabLayout;
 import com.projects.mygroceryshop.Context.DBContext;
 import com.projects.mygroceryshop.Service.DB;
 
+import java.util.logging.Handler;
+
 public class MainActivity extends AppCompatActivity {
     private Context context;
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -42,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
-
     }
 
     @Override

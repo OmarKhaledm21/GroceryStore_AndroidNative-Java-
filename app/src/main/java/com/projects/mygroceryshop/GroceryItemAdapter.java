@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,8 +15,10 @@ import androidx.annotation.Nullable;
 import com.projects.mygroceryshop.Model.GroceryItem;
 
 import java.util.List;
+import android.os.Handler;
 
 public class GroceryItemAdapter extends ArrayAdapter<GroceryItem> {
+    private Handler handler = new Handler();
 
     public GroceryItemAdapter(@NonNull Context context, int resource, @NonNull List<GroceryItem> objects) {
         super(context, 0, objects);
@@ -44,7 +47,38 @@ public class GroceryItemAdapter extends ArrayAdapter<GroceryItem> {
             imageView.setImageResource(groceryItem.getImgResId());
         }
 
+        Button incrementBtn = (Button)listItemView.findViewById(R.id.increment_btn);
+        Button decrementBtn = (Button) listItemView.findViewById(R.id.decrement_btn);
+        TextView itemCounter = (TextView) listItemView.findViewById(R.id.item_counter);
+
+        incrementBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        int current = Integer.parseInt(itemCounter.getText().toString()) +1;
+                        itemCounter.setText(String.valueOf(current));
+                    }
+                });
+            }}
+        );
+
+        decrementBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        int current = Integer.parseInt(itemCounter.getText().toString()) -1;
+                        if(current>=0) {
+                            itemCounter.setText(String.valueOf(current));
+                        }
+                    }
+                });
+            }});
 
         return listItemView;
     }
+
 }
