@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.projects.mygroceryshop.Model.Cart;
+
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     public SectionsPagerAdapter(@NonNull FragmentManager fm) {

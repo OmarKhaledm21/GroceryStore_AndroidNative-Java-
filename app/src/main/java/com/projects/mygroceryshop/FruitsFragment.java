@@ -1,5 +1,6 @@
 package com.projects.mygroceryshop;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,7 +19,6 @@ import com.projects.mygroceryshop.Model.ItemCategory;
 import java.util.ArrayList;
 
 public class FruitsFragment extends Fragment {
-
     private ArrayList<GroceryItem> fruits;
     private final ItemCategory itemCategory = ItemCategory.FRUIT;
     private LoadItemCommand loadItemCommand = new LoadItemCommand(itemCategory);
@@ -29,7 +29,6 @@ public class FruitsFragment extends Fragment {
             fruits = loadItemCommand.getGroceryItems();
         }
     }
-
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -46,4 +45,6 @@ public class FruitsFragment extends Fragment {
 
         return rootView;
     }
+
+
 }

@@ -19,9 +19,14 @@ import android.os.Handler;
 
 public class GroceryItemAdapter extends ArrayAdapter<GroceryItem> {
     private Handler handler = new Handler();
-
+    private fragmentUpdated fragmentUpdated;
     public GroceryItemAdapter(@NonNull Context context, int resource, @NonNull List<GroceryItem> objects) {
         super(context, 0, objects);
+        fragmentUpdated = (fragmentUpdated) context;
+    }
+
+    private void sendUpdate(){
+        fragmentUpdated.updateActivityUI();
     }
 
     @NonNull
@@ -59,6 +64,8 @@ public class GroceryItemAdapter extends ArrayAdapter<GroceryItem> {
                     public void run() {
                         int current = Integer.parseInt(itemCounter.getText().toString()) +1;
                         itemCounter.setText(String.valueOf(current));
+                        MainActivity.cart.addItem(groceryItem,current);
+                        sendUpdate();
                     }
                 });
             }}
@@ -73,6 +80,8 @@ public class GroceryItemAdapter extends ArrayAdapter<GroceryItem> {
                         int current = Integer.parseInt(itemCounter.getText().toString()) -1;
                         if(current>=0) {
                             itemCounter.setText(String.valueOf(current));
+                            MainActivity.cart.addItem(groceryItem,current);
+                            sendUpdate();
                         }
                     }
                 });
