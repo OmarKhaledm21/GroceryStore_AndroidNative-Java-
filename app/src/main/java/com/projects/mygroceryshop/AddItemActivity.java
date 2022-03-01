@@ -1,6 +1,7 @@
 package com.projects.mygroceryshop;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -34,6 +35,7 @@ public class AddItemActivity extends AppCompatActivity {
     private String itemName=null;
     private double itemPrice=0.0;
     private String spinnerCat=null;
+    private Context context;
 
     ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
             new ActivityResultCallback<Uri>() {
@@ -44,11 +46,12 @@ public class AddItemActivity extends AppCompatActivity {
             });
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_item_layout);
-
+        this.context = getApplicationContext();
         item_name = (EditText) findViewById(R.id.name_input);
         item_price = (EditText)findViewById(R.id.price_input);
         finishBtn = (Button)findViewById(R.id.finish_input);
@@ -121,8 +124,7 @@ public class AddItemActivity extends AppCompatActivity {
 
     public boolean addItem(GroceryItem item){
         addItemCommand = new AddItemCommand(item);
-        addItemCommand.execute();
-
+        addItemCommand.execute(this.context);
         if(addItemCommand.isExecuted()) {
             Intent intent = new Intent(AddItemActivity.this, MainActivity.class);
             startActivity(intent);

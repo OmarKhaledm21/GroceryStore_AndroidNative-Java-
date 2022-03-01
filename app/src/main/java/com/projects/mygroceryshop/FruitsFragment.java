@@ -19,12 +19,13 @@ import com.projects.mygroceryshop.Model.ItemCategory;
 import java.util.ArrayList;
 
 public class FruitsFragment extends Fragment {
+    private Context context;
     private ArrayList<GroceryItem> fruits;
     private final ItemCategory itemCategory = ItemCategory.FRUIT;
     private LoadItemCommand loadItemCommand = new LoadItemCommand(itemCategory);
 
     public void loadItems() {
-        loadItemCommand.execute();
+        loadItemCommand.execute(context);
         if(loadItemCommand.isExecuted()){
             fruits = loadItemCommand.getGroceryItems();
         }
@@ -32,7 +33,7 @@ public class FruitsFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-
+        this.context = context;
     }
 
     @Override

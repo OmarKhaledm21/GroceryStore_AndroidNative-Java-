@@ -1,10 +1,10 @@
 package com.projects.mygroceryshop.CommandController;
 
-import android.util.Log;
+import android.content.Context;
 
 import com.projects.mygroceryshop.Context.DBContext;
 import com.projects.mygroceryshop.Model.GroceryItem;
-import com.projects.mygroceryshop.Service.IDatabaseService;
+import com.projects.mygroceryshop.Service.DBHelper;
 
 public class AddItemCommand extends Command{
     private GroceryItem item;
@@ -13,7 +13,8 @@ public class AddItemCommand extends Command{
     }
 
     @Override
-    public void execute() {
+    public void execute(Context context) {
+        DBContext.getDBContext().setDbService(new DBHelper(context));
         setIsExecuted(DBContext.getDBContext().getDbService().addItem(item));
     }
 }

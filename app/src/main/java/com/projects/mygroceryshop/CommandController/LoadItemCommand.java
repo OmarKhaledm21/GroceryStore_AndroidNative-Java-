@@ -1,11 +1,11 @@
 package com.projects.mygroceryshop.CommandController;
 
-import android.util.Log;
+import android.content.Context;
 
 import com.projects.mygroceryshop.Context.DBContext;
 import com.projects.mygroceryshop.Model.GroceryItem;
 import com.projects.mygroceryshop.Model.ItemCategory;
-import com.projects.mygroceryshop.Service.IDatabaseService;
+import com.projects.mygroceryshop.Service.DBHelper;
 
 import java.util.ArrayList;
 
@@ -17,7 +17,8 @@ public class LoadItemCommand extends Command{
     }
 
     @Override
-    public void execute() {
+    public void execute(Context context) {
+        DBContext.getDBContext().setDbService(new DBHelper(context));
         groceryItems = DBContext.getDBContext().getDbService().getGroceryItems();
         setIsExecuted(true);
     }

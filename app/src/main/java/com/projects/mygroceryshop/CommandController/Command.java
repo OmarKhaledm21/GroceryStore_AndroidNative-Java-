@@ -1,10 +1,12 @@
 package com.projects.mygroceryshop.CommandController;
 
 
+import android.content.Context;
+
 public abstract class Command {
     private boolean is_executed;
 
-    abstract public void execute();
+    abstract public void execute(Context context);
 
     public boolean setIsExecuted(boolean is_executed){
         this.is_executed = is_executed;

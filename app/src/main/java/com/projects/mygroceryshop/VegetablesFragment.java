@@ -20,12 +20,12 @@ import com.projects.mygroceryshop.Model.ItemCategory;
 import java.util.ArrayList;
 
 public class VegetablesFragment extends Fragment {
-
+    private Context context;
     private ArrayList<GroceryItem> vegs;
     private final ItemCategory itemCategory = ItemCategory.VEGETABLE;
     private LoadItemCommand loadItemCommand = new LoadItemCommand(itemCategory);
     public void loadItems() {
-        loadItemCommand.execute();
+        loadItemCommand.execute(context);
         if(loadItemCommand.isExecuted()){
             vegs = loadItemCommand.getGroceryItems();
         }
@@ -33,6 +33,7 @@ public class VegetablesFragment extends Fragment {
 
     @Override
     public void onAttach(@NonNull Context context) {
+        this.context = context;
         super.onAttach(context);
 
     }
@@ -45,9 +46,6 @@ public class VegetablesFragment extends Fragment {
         GroceryItemAdapter adapter = new GroceryItemAdapter(getActivity(),0,vegs);
         ListView listView = (ListView) rootView.findViewById(R.id.list);
         listView.setAdapter(adapter);
-
-
-
         return rootView;
     }
 

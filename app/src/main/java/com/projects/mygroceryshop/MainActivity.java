@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,9 +18,7 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
-import com.projects.mygroceryshop.Context.DBContext;
 import com.projects.mygroceryshop.Model.Cart;
-import com.projects.mygroceryshop.Service.DB;
 
 public class MainActivity extends AppCompatActivity implements fragmentUpdated{
     private Context context;
@@ -36,7 +33,6 @@ public class MainActivity extends AppCompatActivity implements fragmentUpdated{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         this.context = getApplicationContext();
         cart = new Cart();
 
